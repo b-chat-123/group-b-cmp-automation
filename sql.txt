@@ -1,0 +1,37 @@
+drop table CMP_PRODUCT;
+
+create table CMP_PRODUCT (
+	PRODUCT_ID integer not null, 
+	PRODUCT_DESC varchar(1024), 
+	API_PARM varchar(1024),
+	constraint CMP_PRODUCT_PK primary key (
+		PRODUCT_ID
+	)
+);  
+
+INSERT INTO CMP_PRODUCT (PRODUCT_ID, PRODUCT_DESC, API_PARM) VALUES (10, 'Tomcat', '[{tag="uid",value="$USERID$"},{tag="sysid",value="NAM"}]');
+INSERT INTO CMP_PRODUCT (PRODUCT_ID, PRODUCT_DESC, API_PARM) VALUES (11, 'MySQL', '[{tag="uid",value="$USERID$"},{tag="sysid",value="NAM"},{tag="ver",value="1.1"}]');
+INSERT INTO CMP_PRODUCT (PRODUCT_ID, PRODUCT_DESC, API_PARM) VALUES (12, 'Eclipse IDE', '[{tag="uid",value="$USERID$"},{tag="sysid",value="NAM"}]');
+INSERT INTO CMP_PRODUCT (PRODUCT_ID, PRODUCT_DESC, API_PARM) VALUES (13, 'MongoDB', '');
+
+drop table ROLE_CMP_PRODUCTS;
+
+select * from CMP_PRODUCT;
+
+create table ROLE_CMP_PRODUCTS (
+	ROLE_ID varchar(256) not null,
+	PRODUCT_ID integer not null,
+	constraint ROLE_CMP_PRODUCTS_PK primary key (
+		ROLE_ID, PRODUCT_ID
+	)
+);  	
+
+INSERT INTO ROLE_CMP_PRODUCTS (ROLE_ID, PRODUCT_ID) VALUES ('DEV', 10);
+INSERT INTO ROLE_CMP_PRODUCTS (ROLE_ID, PRODUCT_ID) VALUES ('DEV', 12);
+INSERT INTO ROLE_CMP_PRODUCTS (ROLE_ID, PRODUCT_ID) VALUES ('UTT', 10);
+INSERT INTO ROLE_CMP_PRODUCTS (ROLE_ID, PRODUCT_ID) VALUES ('UTT', 11);
+INSERT INTO ROLE_CMP_PRODUCTS (ROLE_ID, PRODUCT_ID) VALUES ('UTT', 13);
+INSERT INTO ROLE_CMP_PRODUCTS (ROLE_ID, PRODUCT_ID) VALUES ('BIZ', 11);
+
+
+commit;
